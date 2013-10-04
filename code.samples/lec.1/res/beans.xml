@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+	<bean id="sensor" class="ru.mrdekk.j2ee.Sensor" />
+	
+	<bean id="actuator" class="ru.mrdekk.j2ee.Actuator" />
+	
+	<bean id="controller" class="ru.mrdekk.j2ee.IntellectualController" >
+		<property name="sensor" ref="sensor" />
+		<property name="actuator" ref="actuator" />
+		<property name="limit" value="22.0" />
+	</bean>
+
+</beans>
