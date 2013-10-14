@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+	<bean id="randomSensor" class="ru.mrdekk.j2ee.lecture2.impl.Sensor" >
+		<constructor-arg name="url" value="network://random-sensor" />
+	</bean>
+	
+	<bean id="soutActuator" class="ru.mrdekk.j2ee.lecture2.impl.Actuator" >
+		<constructor-arg name="url" value="network://standard-out-actuator" />
+	</bean>
+	
+	<bean id="controller" class="ru.mrdekk.j2ee.lecture2.services.IntellectualController" init-method="doTheWork" >
+		<constructor-arg name="url" value="network://intellectual-router" />
+	
+		<property name="sensor" ref="randomSensor" />
+		<property name="actuator" ref="soutActuator" />
+		<property name="limit" value="20.0" />
+	</bean>
+
+</beans>
