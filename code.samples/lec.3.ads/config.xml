@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<domain xmlns="http://xmlns.oracle.com/weblogic/domain" xmlns:sec="http://xmlns.oracle.com/weblogic/security" xmlns:wls="http://xmlns.oracle.com/weblogic/security/wls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.oracle.com/weblogic/security/xacml http://xmlns.oracle.com/weblogic/security/xacml/1.0/xacml.xsd http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator/1.0/passwordvalidator.xsd http://xmlns.oracle.com/weblogic/domain http://xmlns.oracle.com/weblogic/1.0/domain.xsd http://xmlns.oracle.com/weblogic/security http://xmlns.oracle.com/weblogic/1.0/security.xsd http://xmlns.oracle.com/weblogic/security/wls http://xmlns.oracle.com/weblogic/security/wls/1.0/wls.xsd">
+  <name>my.domain</name>
+  <domain-version>12.1.1.0</domain-version>
+  <security-configuration>
+    <name>my.domain</name>
+    <realm>
+      <sec:authentication-provider xsi:type="wls:default-authenticatorType"></sec:authentication-provider>
+      <sec:authentication-provider xsi:type="wls:default-identity-asserterType">
+        <sec:active-type>AuthenticatedUser</sec:active-type>
+      </sec:authentication-provider>
+      <sec:role-mapper xmlns:xac="http://xmlns.oracle.com/weblogic/security/xacml" xsi:type="xac:xacml-role-mapperType"></sec:role-mapper>
+      <sec:authorizer xmlns:xac="http://xmlns.oracle.com/weblogic/security/xacml" xsi:type="xac:xacml-authorizerType"></sec:authorizer>
+      <sec:adjudicator xsi:type="wls:default-adjudicatorType"></sec:adjudicator>
+      <sec:credential-mapper xsi:type="wls:default-credential-mapperType"></sec:credential-mapper>
+      <sec:cert-path-provider xsi:type="wls:web-logic-cert-path-providerType"></sec:cert-path-provider>
+      <sec:cert-path-builder>WebLogicCertPathProvider</sec:cert-path-builder>
+      <sec:name>myrealm</sec:name>
+      <sec:password-validator xmlns:pas="http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator" xsi:type="pas:system-password-validatorType">
+        <sec:name>SystemPasswordValidator</sec:name>
+        <pas:min-password-length>8</pas:min-password-length>
+        <pas:min-numeric-or-special-characters>1</pas:min-numeric-or-special-characters>
+      </sec:password-validator>
+    </realm>
+    <default-realm>myrealm</default-realm>
+    <credential-encrypted>{AES}pHwk9nU1/DeuPdKg2IgTLjFImqoJgGFzjs4AhGCVudfm6QnfPIXcQ41LuK243PIg7tteUzTNKkVBsHINnfIU5cSQ+EldQcFWght0ZILwjflceldSclSdcfxXq+liBj7Z</credential-encrypted>
+    <node-manager-username>admin</node-manager-username>
+    <node-manager-password-encrypted>{AES}tCKNZBqXyrci+a87+1CT6FOtFVRvTkhUvbR1IqVCCgU=</node-manager-password-encrypted>
+  </security-configuration>
+  <server>
+    <name>AdminServer</name>
+    <listen-address></listen-address>
+  </server>
+  <embedded-ldap>
+    <name>my.domain</name>
+    <credential-encrypted>{AES}sHU+2Y0+BwhZKy2KLjq6wtGMBTScUWzXKxpYl2holoL+XwOwZWEuwhEl+kKDNYrd</credential-encrypted>
+  </embedded-ldap>
+  <configuration-version>12.1.1.0</configuration-version>
+  <app-deployment>
+    <name>lec2-ear</name>
+    <target>AdminServer</target>
+    <module-type>ear</module-type>
+    <source-path>C:\Works\testbench\j2ee\code.samples\lec.2\lec2-ear\target\lec2-ear-1.0.0-SNAPSHOT.ear</source-path>
+    <security-dd-model>DDOnly</security-dd-model>
+  </app-deployment>
+  <app-deployment>
+    <name>lec3-ear-1.0.0-SNAPSHOT</name>
+    <target>AdminServer</target>
+    <module-type>ear</module-type>
+    <source-path>C:\Works\testbench\j2ee\code.samples\lec.3\lec3-ear\target\lec3-ear-1.0.0-SNAPSHOT.ear</source-path>
+    <security-dd-model>DDOnly</security-dd-model>
+  </app-deployment>
+  <foreign-jndi-provider>
+    <name>cfg</name>
+    <initial-context-factory>com.sun.jndi.fscontext.RefFSContextFactory</initial-context-factory>
+    <provider-url>file:/C:/Works/wls.configs/jndi-tutorial</provider-url>
+    <foreign-jndi-link>
+      <name>ComfortableTemperature</name>
+      <local-jndi-name>cfg/Config/ComfortableTemperature</local-jndi-name>
+      <remote-jndi-name>Config/comfortableTemperature</remote-jndi-name>
+    </foreign-jndi-link>
+  </foreign-jndi-provider>
+  <admin-server-name>AdminServer</admin-server-name>
+</domain>

@@ -1,0 +1,10 @@
+  <foreign-jndi-provider>
+    <name>cfg</name>
+    <initial-context-factory>com.sun.jndi.fscontext.RefFSContextFactory</initial-context-factory>
+    <provider-url>file:/C:/Works/wls.configs/jndi-tutorial</provider-url>
+    <foreign-jndi-link>
+      <name>ComfortableTemperature</name>
+      <local-jndi-name>cfg/Config/ComfortableTemperature</local-jndi-name>
+      <remote-jndi-name>Config/comfortableTemperature</remote-jndi-name>
+    </foreign-jndi-link>
+  </foreign-jndi-provider>
