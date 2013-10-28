@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.mrdekk.j2ee.lec4.entities.Recipe;
@@ -11,7 +12,7 @@ import ru.mrdekk.j2ee.lec4.repositories.RecipeRepository;
 
 public class RecipeService implements IRecipeService
 {
-	@Resource
+	@Autowired
 	private RecipeRepository recipeRepository;
 	
 	@Transactional

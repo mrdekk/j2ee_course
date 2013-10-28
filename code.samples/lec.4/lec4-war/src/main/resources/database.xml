@@ -49,7 +49,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager"/>
 
-	<djpa:repositories base-package="ru.mrdekk.j2ee.lec4.repositories" />
+	<djpa:repositories base-package="ru.mrdekk.j2ee.lec4" />
 	
 	<bean id="recipeService" class="ru.mrdekk.j2ee.lec4.services.RecipeService" />
 	

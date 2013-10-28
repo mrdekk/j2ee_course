@@ -17,9 +17,9 @@ import javax.persistence.Table;
 public class Recipe
 {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column( name = "id" )
-	private int id;
+	private Integer id;
 	
 	@Column( name = "name", nullable = false, length = 100 )
 	private String name;
@@ -28,8 +28,8 @@ public class Recipe
 	private List< RecipeItem > items = new ArrayList< RecipeItem >( );
 	
 	// @formatter:off
-	public void setId( int id ) { this.id = id; }
-	public int getId( ) { return id; }
+	public void setId( Integer id ) { this.id = id; }
+	public Integer getId( ) { return id; }
 	
 	public void setName( String name ) { this.name = name; }
 	public String getName( ) { return name; }
@@ -53,5 +53,11 @@ public class Recipe
 		bld.append( " } " );
 		
 		return bld.toString( );
+	}
+	
+	public static void connect( Recipe recipe, RecipeItem item )
+	{
+		recipe.getItems( ).add( item );
+		item.setRecipe( recipe );
 	}
 }

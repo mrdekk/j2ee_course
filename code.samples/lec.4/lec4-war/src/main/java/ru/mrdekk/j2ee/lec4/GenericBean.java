@@ -20,28 +20,36 @@ public class GenericBean
 	
 	public void init( )
 	{
-		Recipe recipe = new Recipe( );
-		recipe.setName( "Салат \"рекурсивный\"" );
-		
-		RecipeItem item = new RecipeItem( );
-		item.setIngredient( "Огурцы" );
-		item.setQuantity( 1.0f );
-		recipe.getItems( ).add( item );
-		
-		item = new RecipeItem( );
-		item.setIngredient( "Помидоры" );
-		item.setQuantity( 2.0f );
-		recipe.getItems( ).add( item );
-		
-		item = new RecipeItem( );
-		item.setIngredient( "Салат \"рекурсивный\"" );
-		item.setQuantity( 3.0f );
-		recipe.getItems( ).add( item );
-		
-		Recipe recipe2 = _recipeService.create( recipe );
-		
-		Recipe recipe3 = _recipeService.findById( recipe2.getId( ) );
-		
-		log.info( recipe3.toString( ) );
+		try
+		{
+			Recipe recipe = new Recipe( );
+			recipe.setName( "Салат \"рекурсивный\"" );
+			recipe = _recipeService.create( recipe );
+			
+			RecipeItem item = new RecipeItem( );
+			item.setIngredient( "Огурцы" );
+			item.setQuantity( 1.0f );		
+			Recipe.connect( recipe, item );	
+			
+			item = new RecipeItem( );
+			item.setIngredient( "Помидоры" );
+			item.setQuantity( 2.0f );
+			Recipe.connect( recipe, item );
+			
+			item = new RecipeItem( );
+			item.setIngredient( "Салат \"рекурсивный\"" );
+			item.setQuantity( 3.0f );
+			Recipe.connect( recipe, item );
+			
+			recipe = _recipeService.update( recipe );
+					
+			Recipe recipe3 = _recipeService.findById( recipe.getId( ) );
+			
+			log.info( recipe3.toString( ) );
+		}
+		catch ( Exception exc )
+		{
+			log.error( "Error", exc );
+		}
 	}
 }
