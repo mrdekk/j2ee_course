@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+		version="1.0" 
+		xmlns="http://java.sun.com/xml/ns/persistence"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+							http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" >
+							
+	<persistence-unit name="recipesPersistenceUnit" transaction-type="JTA" >
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>recipesConnection</jta-data-source>
+		<mapping-file>META-INF/orm.xml</mapping-file>
+		<properties>
+			<property name="eclipselink.ddl-generation" value="none"/>
+            <property name="eclipselink.target-server" value="Weblogic_10"/>
+            <property name="eclipselink.target-database" value="MYSQL"/>
+            <property name="eclipselink.weaving" value="false"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <property name="eclipselink.jdbc.batch-writing" value="none" />
+            <property name="eclipselink.jdbc.fetch-size" value="1000"/>
+        </properties>
+	</persistence-unit>
+</persistence>
