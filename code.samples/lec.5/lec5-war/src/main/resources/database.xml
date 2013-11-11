@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans 
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:djpa="http://www.springframework.org/schema/data/jpa"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/tx
+							http://www.springframework.org/schema/tx/spring-tx.xsd
+							http://www.springframework.org/schema/jee
+							http://www.springframework.org/schema/jee/spring-jee.xsd
+							http://www.springframework.org/schema/data/jpa
+							http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+	
+	<!--Подключение к БД-->
+	<bean id="pum" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath:persistence.xml</value>
+			</list>
+		</property>
+		<property name="defaultDataSource" ref="containerMySQLConnection" />
+   </bean>
+   
+   <jee:jndi-lookup id="containerMySQLConnection" jndi-name="recipesConnection" />
+   
+   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitManager" ref="pum" />
+		<property name="dataSource" ref="containerMySQLConnection" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="eclipselink.ddl-generation">none</prop>
+                <prop key="javax.persistence.jdbc.driver">com.mysql.jdbc.Driver</prop>
+                <prop key="eclipselink.weaving">false</prop>
+                <prop key="eclipselink.target-server">Weblogic_10</prop>
+                <prop key="eclipselink.target-database">MYSQL</prop>
+			</props>
+		</property>
+		<property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+                <property name="databasePlatform" value="MYSQL" />
+                <property name="showSql" value="true" />
+            </bean>
+		</property>
+	</bean>
+   
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager"/>
+
+	<djpa:repositories base-package="ru.mrdekk.j2ee.lec5" />
+	
+	<bean id="recipeService" class="ru.mrdekk.j2ee.lec5.services.RecipeService" />
+	
+</beans>
