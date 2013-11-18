@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jms="http://www.springframework.org/schema/jms"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/jms 
+							http://www.springframework.org/schema/jms/spring-jms.xsd" >
+
+	<!-- JMS -->
+
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory" >
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop" >
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate" >
+		<property name="connectionFactory" ref="jmsFactory" />
+	</bean>
+	
+	<bean id="inQueue" class="org.apache.activemq.command.ActiveMQQueue" >
+		<constructor-arg value="in.queue" />
+	</bean>
+	
+	<bean id="outQueue" class="org.apache.activemq.command.ActiveMQQueue" >
+		<constructor-arg value="out.queue" />
+	</bean>
+	
+	<jms:listener-container container-type="default" connection-factory="jmsFactory" acknowledge="auto" destination-type="queue" >
+		<jms:listener destination="in.queue" ref="inListener" method="onMessage" />
+	</jms:listener-container>										
+
+	<!-- beans -->
+	
+	<bean id="inListener" class="ru.mrdekk.j2ee.lec7.InListener" >
+		<property name="producer" ref="producer" />
+	</bean>
+	
+	<bean id="producer" class="ru.mrdekk.j2ee.lec7.Producer" >
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="destination" ref="outQueue" />
+	</bean>
+
+</beans>
