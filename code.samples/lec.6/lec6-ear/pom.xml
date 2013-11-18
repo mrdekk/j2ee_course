@@ -1,0 +1,61 @@
+<project 
+		xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+							http://maven.apache.org/xsd/maven-4.0.0.xsd" >
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>lec6-parent</artifactId>
+		<groupId>ru.mrdekk.j2ee</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>lec6-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>Lecture 6 application deploy</name>
+	
+	<build>
+    
+        <resources>
+            <resource>
+                <targetPath>META-INF/</targetPath>
+                <directory>${project.basedir}/ear-content/META-INF/</directory>
+                <excludes>
+                    <exclude>**/application.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        
+        <sourceDirectory>ear-content</sourceDirectory>
+        
+        <plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <modules>
+                        <webModule>
+                            <groupId>ru.mrdekk.j2ee</groupId>
+                            <artifactId>lec6-war</artifactId>
+                            <contextRoot>/warp6</contextRoot>
+                        </webModule>
+                    </modules>
+                    <displayName>WAR Project</displayName>
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <resourcesDir>target/classes</resourcesDir>
+                </configuration>
+            </plugin>
+        </plugins>
+        
+    </build>
+
+	<dependencies>
+		<dependency>
+			<groupId>ru.mrdekk.j2ee</groupId>
+			<artifactId>lec6-war</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+    </dependencies>
+	
+</project>
