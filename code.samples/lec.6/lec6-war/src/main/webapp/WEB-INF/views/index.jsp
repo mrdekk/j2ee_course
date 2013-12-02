@@ -9,5 +9,6 @@
 		<h1 align="center" >${greeting}</h1>
 		<hr />
 		<a href="/warp6/greet" >Greet yourself...</a>
+		<a href="/warp6/ajax/index" >Ajax Demo...</a>
 	</body>
 </html>
