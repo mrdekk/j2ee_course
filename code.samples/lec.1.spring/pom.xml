@@ -1,18 +1,43 @@
 <project 
 		xmlns="http://maven.apache.org/POM/4.0.0" 
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
 							http://maven.apache.org/xsd/maven-4.0.0.xsd" >
-
+							
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.mrdekk.j2ee</groupId>
-	<artifactId>lec1</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<groupId>ru.malykh.da</groupId>
+	<artifactId>mart-parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Mart Parent Project</name>
 	
 	<properties>
-		<org.springframework-version>3.2.4.RELEASE</org.springframework-version>
+		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<junit-version>4.11</junit-version>
+		<java-version>1.7</java-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler-version>3.3</maven.compiler-version>
 	</properties>
+	
+	<build>
+		<plugins>
+		
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler-version}</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+		
+		</plugins>
+	</build>
 	
 	<dependencies>
 		<!-- Spring Framework -->
@@ -35,4 +60,7 @@
 		</dependency>
 	</dependencies>
 	
+	<modules>
+		<module>lec1</module>
+	</modules>
 </project>
