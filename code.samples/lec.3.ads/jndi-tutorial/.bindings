@@ -1,8 +1,0 @@
-﻿Config/comfortableTemperature/ClassName=ru.mrdekk.j2ee.lec3.jndi.ComfortableTemperature
-Config/comfortableTemperature/FactoryName=ru.mrdekk.j2ee.lec3.jndi.ComfortableTemperatureFactory
-Config/comfortableTemperature/RefAddr/0/Type=ref
-Config/comfortableTemperature/RefAddr/0/Encoding=String
-Config/comfortableTemperature/RefAddr/0/Content=defs://comfortable-temperature
-Config/comfortableTemperature/RefAddr/1/Type=temperature
-Config/comfortableTemperature/RefAddr/1/Encoding=String
-Config/comfortableTemperature/RefAddr/1/Content=22.5

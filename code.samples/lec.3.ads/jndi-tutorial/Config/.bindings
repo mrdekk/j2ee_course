@@ -1,0 +1,9 @@
+comfortableTemperature/ClassName=ru.malykh.da.lec3.jndi.ComfortableTemperature
+comfortableTemperature/FactoryName=ru.malykh.da.lec3.jndi.ComfortableTemperatureFactory
+
+comfortableTemperature/RefAddr/0/Type=ref
+comfortableTemperature/RefAddr/0/Encoding=String
+comfortableTemperature/RefAddr/0/Content=defs://comfortable-temperature
+comfortableTemperature/RefAddr/1/Type=temperature
+comfortableTemperature/RefAddr/1/Encoding=String
+comfortableTemperature/RefAddr/1/Content=22.5

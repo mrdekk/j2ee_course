@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module xmlns="urn:jboss:module:1.0" name="com.sun.jndi.fscontext" >
+	<resources>
+		<resource-root path="providerutil-1.2.jar" />
+		<resource-root path="fscontext-1.2-beta-3.jar" />
+	</resources>
+	<dependencies>
+		<module name="javax.api" />
+		<module name="org.jboss.invocation" />
+	</dependencies>
+</module>
