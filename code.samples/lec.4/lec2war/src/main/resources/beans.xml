@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+		xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context.xsd" >
+
+	<!-- Лекция 2 -->
+
+	<bean id="randomSensor" class="ru.malykh.da.lec1.impl.Sensor" >
+		<constructor-arg name="url" value="network://dining-room/t-sensor" />
+	</bean>
+	
+	<bean id="soutActuator" class="ru.malykh.da.lec1.impl.Actuator" >
+		<constructor-arg name="url" value="network://dining-room/conditioner-switch" />
+	</bean>
+	
+	<bean id="controller" class="ru.malykh.da.lec1.services.IntellectualController" >
+		<constructor-arg name="url" value="network://dining-room/thermostat" />
+	
+		<property name="sensor" ref="randomSensor" />
+		<property name="actuator" ref="soutActuator" />
+		<property name="limit" value="20.0" />
+	</bean>
+	
+	<bean id="runner" class="ru.malykh.da.lec2.RunnerBean" init-method="init" >
+		<property name="controller" ref="controller" />
+	</bean>
+	
+	<!-- Лекция 3 -->
+	
+	<!-- jee:jndi-lookup id="comfortableTemperature" jndi-name="java:global/cfg/Config/comfortableTemperature" / -->
+	<bean id="comfortableTemperature" class="org.springframework.jndi.JndiObjectFactoryBean" >
+		<property name="jndiName" value="java:global/cfg/Config/comfortableTemperature" />
+		<property name="lookupOnStartup" value="true" />
+	</bean>
+
+	<bean id="runner2" class="ru.malykh.da.lec3.RunnerBean" init-method="init" >
+		<property name="comfortableTemperature" ref="comfortableTemperature" />
+	</bean>
+	
+	<!-- Лекция 4 -->
+	
+	<context:annotation-config />
+	<context:component-scan base-package="ru.malykh.da" />
+
+	<import resource="database.xml" />
+	
+	<bean id="runner3" class="ru.malykh.da.lec4.RunnerBean" init-method="init">
+		<property name="recipeService" ref="recipeService" />
+		<property name="ingredientService" ref="ingredientService" />
+	</bean>
+
+</beans>

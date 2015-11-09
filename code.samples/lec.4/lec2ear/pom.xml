@@ -1,0 +1,57 @@
+<project 
+		xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+							http://maven.apache.org/xsd/maven-4.0.0.xsd" >
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ru.malykh.da</groupId>
+		<artifactId>mart-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>lec2ear</artifactId>
+	<packaging>ear</packaging>
+	<name>Lecture 2 EAR Project</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>ru.malykh.da</groupId>
+			<artifactId>lec2war</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+    </dependencies>
+	
+	
+	<build>
+		<resources>
+            <resource>
+                <targetPath>META-INF/</targetPath>
+                <directory>${project.basedir}/ear-content/META-INF/</directory>
+                <excludes>
+                    <exclude>**/application.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        
+        <sourceDirectory>ear-content</sourceDirectory>
+
+		<plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <modules>
+                        <webModule>
+                            <groupId>ru.malykh.da</groupId>
+                            <artifactId>lec2war</artifactId>
+                            <contextRoot>/lec2</contextRoot>
+                        </webModule>
+                    </modules>
+                    <displayName>Lecture 2 WAR</displayName>
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <resourcesDir>target/classes</resourcesDir>
+                </configuration>
+            </plugin>
+        </plugins>        
+	</build>
+</project>
