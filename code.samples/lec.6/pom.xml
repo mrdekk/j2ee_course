@@ -1,35 +1,48 @@
 <project 
 		xmlns="http://maven.apache.org/POM/4.0.0" 
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
 							http://maven.apache.org/xsd/maven-4.0.0.xsd" >
-
+							
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.mrdekk.j2ee</groupId>
-	<artifactId>lec6-parent</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<groupId>ru.malykh.da</groupId>
+	<artifactId>mart-parent</artifactId>
+	<version>1.0</version>
 	<packaging>pom</packaging>
-	<name>Lecture 6 parent project</name>
-	
-	<modules>
-		<module>lec6-war</module>
-		<module>lec6-ear</module>
-	</modules>
+	<name>Mart Parent Project</name>
 	
 	<properties>
-		<org.springframework-version>3.2.4.RELEASE</org.springframework-version>
-		<org.springframework.data.jpa-version>1.4.2.RELEASE</org.springframework.data.jpa-version>
+		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<junit-version>4.11</junit-version>
-		<slf4j-version>1.7.2</slf4j-version>
-		<log4j-version>1.2.15</log4j-version>
+		<java-version>1.7</java-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler-version>3.3</maven.compiler-version>
+		<org.slf4j-version>1.7.12</org.slf4j-version>
 		<persistence-api-version>1.0.2</persistence-api-version>
 		<org.eclipse.persistence-version>2.5.1</org.eclipse.persistence-version>
-		<javax.annotation-version>1.2</javax.annotation-version>
+		<org.springframework.data.jpa-version>1.9.0.RELEASE</org.springframework.data.jpa-version>
 		<servlet.api-version>2.5</servlet.api-version>
-		<jackson.json-version>1.7.1</jackson.json-version>
-		<javax.servlet.jsp-version>2.2</javax.servlet.jsp-version>
-		<javax.servlet.jstl-version>1.2</javax.servlet.jstl-version>
 	</properties>
+	
+	<build>
+		<plugins>
+		
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler-version}</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+		
+		</plugins>
+	</build>
 	
 	<dependencies>
 		<!-- Spring Framework -->
@@ -43,11 +56,6 @@
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
 		
 		<!-- JUnit -->
 		<dependency>
@@ -55,60 +63,12 @@
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
 		</dependency>
-		
-		<!-- Log4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<!-- JavaX -->
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>${javax.annotation-version}</version>
-		</dependency>
-		
-		<!-- JackSon JSON -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.json-version}</version>
-		</dependency>
-		<!-- End JackSon JSON -->
-	</dependencies>	
+	</dependencies>
 	
+	<modules>
+		<module>lec1</module>
+		<module>lec2war</module>
+		<module>lec2ear</module>
+		<module>lec4model</module>
+	</modules>
 </project>
