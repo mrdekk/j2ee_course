@@ -1,0 +1,57 @@
+<project 
+		xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+							http://maven.apache.org/xsd/maven-4.0.0.xsd" >
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ru.malykh.da.supply.provider</groupId>
+		<artifactId>supply-provider-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>provider-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>Supply Provider EAR Project</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>ru.malykh.da.supply.provider</groupId>
+			<artifactId>provider-war</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+    </dependencies>
+	
+	
+	<build>
+		<resources>
+            <resource>
+                <targetPath>META-INF/</targetPath>
+                <directory>${project.basedir}/ear-content/META-INF/</directory>
+                <excludes>
+                    <exclude>**/application.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        
+        <sourceDirectory>ear-content</sourceDirectory>
+
+		<plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <modules>
+                        <webModule>
+                            <groupId>ru.malykh.da.supply.provider</groupId>
+                            <artifactId>provider-war</artifactId>
+                            <contextRoot>/supplyprov</contextRoot>
+                        </webModule>
+                    </modules>
+                    <displayName>Supply Provider WAR</displayName>
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <resourcesDir>target/classes</resourcesDir>
+                </configuration>
+            </plugin>
+        </plugins>        
+	</build>
+</project>

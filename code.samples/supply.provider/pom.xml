@@ -1,0 +1,74 @@
+<project 
+		xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+							http://maven.apache.org/xsd/maven-4.0.0.xsd" >
+							
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ru.malykh.da.supply.provider</groupId>
+	<artifactId>supply-provider-parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Supply Provider Parent Project</name>
+	
+	<properties>
+		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
+		<junit-version>4.11</junit-version>
+		<java-version>1.7</java-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler-version>3.3</maven.compiler-version>
+		<org.slf4j-version>1.7.12</org.slf4j-version>
+		<persistence-api-version>1.0.2</persistence-api-version>
+		<org.eclipse.persistence-version>2.5.1</org.eclipse.persistence-version>
+		<org.springframework.data.jpa-version>1.9.0.RELEASE</org.springframework.data.jpa-version>
+		<servlet.api-version>2.5</servlet.api-version>
+		<activemq-version>5.13.0</activemq-version>
+		<com.fasterxml.jackson-version>2.5.2</com.fasterxml.jackson-version>
+	</properties>
+	
+	<build>
+		<plugins>
+		
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler-version}</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+		
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<!-- Spring Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit-version}</version>
+		</dependency>
+	</dependencies>
+	
+	<modules>
+		<module>provider-war</module>
+		<module>provider-ear</module>
+	</modules>
+</project>
